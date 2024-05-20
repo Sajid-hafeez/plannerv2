@@ -178,9 +178,9 @@ with cols[2]:
 #sleep_hours = get_sleep_hours(sleep_start, sleep_end)
 
 # Reset tasks for sleep hours before updating
-for time_slot in st.session_state.tasks:
-    if st.session_state.tasks[time_slot] == "Sleep":
-        st.session_state.tasks[time_slot] = ""
+# for time_slot in st.session_state.tasks:
+#     if st.session_state.tasks[time_slot] == "Sleep":
+#         st.session_state.tasks[time_slot] = ""
 
 # Display planner tasks in three vertical columns
 st.subheader("Tasks")

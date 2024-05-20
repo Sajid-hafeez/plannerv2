@@ -71,9 +71,9 @@ def plan_tomorrow():
 
 # Initialize session state
 if 'user_id' not in st.session_state:
-    st.session_state.user_id = st.text_input("Enter your username or email", key="user_id_input")
-    if st.session_state.user_id:
-        st.session_state.user_id = st.session_state.user_id_input
+    user_id = st.text_input("Enter your username or email to log in", key="user_id_input")
+    if user_id:
+        st.session_state.user_id = user_id
         st.experimental_rerun()
     st.stop()
 

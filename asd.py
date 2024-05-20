@@ -155,26 +155,27 @@ if whiteboard_image is not None:
 st.subheader("Categories")
 cols = st.columns(3)
 with cols[0]:
-    st.write("Sleep Hours")
-    sleep_start = st.slider("Start", 0, 23, 22, key="sleep_start")
-    sleep_end = st.slider("End", 0, 23, 6, key="sleep_end")
+    # st.write("Sleep Hours")
+    sleep_hours= st.multiselect("sleep_hours", options=[f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(24)])
+    # sleep_start = st.slider("Start", 0, 23, 22, key="sleep_start")
+    # sleep_end = st.slider("End", 0, 23, 6, key="sleep_end")
 with cols[1]:
     fun_hours = st.multiselect("Fun Hours", options=[f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(24)])
 with cols[2]:
     work_hours = st.multiselect("Work Hours", options=[f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(24)])
 
-# Function to handle sleep hours
-def get_sleep_hours(start, end):
-    sleep_hours = []
-    if start <= end:
-        sleep_hours = [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(start, end + 1)]
-    else:
-        sleep_hours = [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(start, 24)]
-        sleep_hours += [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(0, end + 1)]
-    return sleep_hours
+# # Function to handle sleep hours
+# def get_sleep_hours(start, end):
+#     sleep_hours = []
+#     if start <= end:
+#         sleep_hours = [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(start, end + 1)]
+#     else:
+#         sleep_hours = [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(start, 24)]
+#         sleep_hours += [f"{hour:02d}:00 - {hour+1:02d}:00" for hour in range(0, end + 1)]
+#     return sleep_hours
 
 # Get sleep hours
-sleep_hours = get_sleep_hours(sleep_start, sleep_end)
+#sleep_hours = get_sleep_hours(sleep_start, sleep_end)
 
 # Reset tasks for sleep hours before updating
 for time_slot in st.session_state.tasks:

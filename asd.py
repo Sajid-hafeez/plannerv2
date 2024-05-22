@@ -104,6 +104,52 @@ if selected_date.strftime('%Y-%m-%d') != st.session_state.date:
 
 # App title
 st.title(f"Day Planner - {st.session_state.date}")
+from streamlit.components.v1 import html
+
+# HTML, CSS, and JavaScript for an elegant digital clock with a quote, without borders
+elegant_clock_html = """
+<head>
+    <!-- Import Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Sacramento&display=swap' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:300&display=swap' rel='stylesheet'>
+</head>
+<div style='text-align: center;'>
+    <div style='font-family: "Montserrat", sans-serif; background: linear-gradient(135deg, #6e8efb, #a777e3); color: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); border: none;'>
+        <p id='quote' style='font-family: "Sacramento", cursive; font-size: 1.3em; font-style: italic; margin-top: 0; margin-bottom: 10px;'>“The only way to do great work is to love what you do.” – Steve Jobs</p>
+        <h1 id='time' style='font-size: 3.5em; margin: 5px 0;'></h1>
+        <p id='date' style='font-size: 1.3em; margin-bottom: 0;'></p>
+    </div>
+</div>
+<script>
+function updateClock() {
+    var now = new Date();
+    var hours = ('0' + now.getHours()).slice(-2);
+    var minutes = ('0' + now.getMinutes()).slice(-2);
+    var seconds = ('0' + now.getSeconds()).slice(-2);
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    var formattedTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var day = days[now.getDay()];
+    var date = now.getDate();
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var month = months[now.getMonth()];
+    var year = now.getFullYear();
+    var formattedDate = day + ', ' + month + ' ' + date + ', ' + year;
+
+    document.getElementById('time').innerHTML = formattedTime;
+    document.getElementById('date').innerHTML = formattedDate;
+    
+    setTimeout(updateClock, 1000);
+}
+updateClock();
+</script>
+"""
+
+# Use the html function to inject the elegant clock HTML into your Streamlit app
+html(elegant_clock_html, width=600, height=250)
 
 # Whiteboard section
 st.subheader("Whiteboard")

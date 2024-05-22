@@ -151,51 +151,51 @@ updateClock();
 # Use the html function to inject the elegant clock HTML into your Streamlit app
 html(elegant_clock_html, width=600, height=250)
 
-# Whiteboard section
-st.subheader("Whiteboard")
+# # Whiteboard section
+# st.subheader("Whiteboard")
 
-# Handle the whiteboard data
-if st.session_state.whiteboard is not None:
-    whiteboard_array = (st.session_state.whiteboard * 255).astype(np.uint8)
-    initial_drawing = {"objects": [], "background": whiteboard_array.tolist()}
-else:
-    initial_drawing = {"objects": [], "background": "#FFFFFF"}
+# # Handle the whiteboard data
+# if st.session_state.whiteboard is not None:
+#     whiteboard_array = (st.session_state.whiteboard * 255).astype(np.uint8)
+#     initial_drawing = {"objects": [], "background": whiteboard_array.tolist()}
+# else:
+#     initial_drawing = {"objects": [], "background": "#FFFFFF"}
 
-canvas_result = st_canvas(
-    fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
-    stroke_width=2,
-    stroke_color="#000000",
-    background_color="#ffffff",
-    height=400,
-    width=600,
-    drawing_mode="freedraw",
-    key="canvas",
-    initial_drawing=initial_drawing,
-)
+# canvas_result = st_canvas(
+#     fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
+#     stroke_width=2,
+#     stroke_color="#000000",
+#     background_color="#ffffff",
+#     height=400,
+#     width=600,
+#     drawing_mode="freedraw",
+#     key="canvas",
+#     initial_drawing=initial_drawing,
+# )
 
-# Save canvas data
-if canvas_result.image_data is not None:
-    st.session_state.whiteboard = np.array(canvas_result.image_data)
+# # Save canvas data
+# if canvas_result.image_data is not None:
+#     st.session_state.whiteboard = np.array(canvas_result.image_data)
 
-# Function to create a download link for the whiteboard image
-def get_whiteboard_download_link():
-    if st.session_state.whiteboard is not None:
-        img = Image.fromarray((st.session_state.whiteboard * 255).astype(np.uint8))
-        buf = io.BytesIO()
-        img.save(buf, format="PNG")
-        byte_im = buf.getvalue()
-        return byte_im
-    return None
+# # Function to create a download link for the whiteboard image
+# def get_whiteboard_download_link():
+#     if st.session_state.whiteboard is not None:
+#         img = Image.fromarray((st.session_state.whiteboard * 255).astype(np.uint8))
+#         buf = io.BytesIO()
+#         img.save(buf, format="PNG")
+#         byte_im = buf.getvalue()
+#         return byte_im
+#     return None
 
-# Add download button
-whiteboard_image = get_whiteboard_download_link()
-if whiteboard_image is not None:
-    st.download_button(
-        label="Download Whiteboard Image",
-        data=whiteboard_image,
-        file_name=f"whiteboard_{st.session_state.date}.png",
-        mime="image/png"
-    )
+# # Add download button
+# whiteboard_image = get_whiteboard_download_link()
+# if whiteboard_image is not None:
+#     st.download_button(
+#         label="Download Whiteboard Image",
+#         data=whiteboard_image,
+#         file_name=f"whiteboard_{st.session_state.date}.png",
+#         mime="image/png"
+#     )
 
 # Top rows for Sleep, Fun, and Work
 st.subheader("Categories")
